@@ -7,9 +7,102 @@
 		<link href="fonts/font.css" rel="stylesheet" type="text/css">
 		<link href="styles/style.css" rel="stylesheet" type="text/css">
 		<script src="lib/createjs-2013.12.12.min.js"></script>
+		<script>
+			var canvas;
+			var stage;
+			var queue;
+
+			var currentText;
+			var mausteOffset;
+			var pileHeight;
+			var maxPileHeight;
+
+			function init() {
+				canvas = document.getElementById("gameCanvas");
+				stage = new createjs.Stage(canvas);
+
+								queue = new createjs.LoadQueue();
+				queue.installPlugin(createjs.Sound);
+				queue.addEventListener("complete", handleComplete);
+
+				/*var request = new XMLHttpRequest();
+				request.open("GET", "assets/maustelista.json", false);
+				request.send(null);
+				var maustelistaObject = JSON.parse(request.responseText);
+				console.log(maustelistaObject);*/
+
+				queue.loadManifest([
+						{id: "background", src: "assets/misc/background.png"},
+						{id: "pohja", src: "assets/mausteet/pohja.png"},
+						{id: "ketsuppi", src: "assets/mausteet/ketsuppi.png"},
+						{id: "kurkkumajoneesi", src: "assets/mausteet/kurkkumajoneesi.png"}
+				]);
+
+				mausteOffset = 0;
+				pileHeight = 0;
+				maxPileHeight = 20;
+			}
+
+			function handleComplete(event) {
+				var background = new createjs.Bitmap(queue.getResult("background"));
+				stage.addChild(background);
+
+				var kasaaText = new createjs.Text("Kasaa:", "30px Averia Sans Libre", "#444444");
+				kasaaText.x = canvas.width * 0.02;
+				kasaaText.y = canvas.height * 0.9;
+				stage.addChild(kasaaText);
+
+				var currentText = new createjs.Text("KERROSHAMPURILAINEN", "30px Averia Sans Libre", "#000000");
+				currentText.x = canvas.width * 0.12;
+				currentText.y = canvas.height * 0.9;
+				stage.addChild(currentText);
+
+				// TODO: vaihto bitmappeihin ja silmukkaan
+				var pohjaText = new createjs.Text("pohja", "24px Averia Sans Libre", "#666");
+				pohjaText.addEventListener("click", addMauste);
+				pohjaText.x = canvas.width * 0.1;
+				pohjaText.y = canvas.height * 0.05;
+				stage.addChild(pohjaText);
+
+				var ketsuppiText = new createjs.Text("ketsuppi", "24px Averia Sans Libre", "#666");
+				ketsuppiText.addEventListener("click", addMauste);
+				ketsuppiText.x = canvas.width * 0.1;
+				ketsuppiText.y = canvas.height * 0.15;
+				stage.addChild(ketsuppiText);
+
+				createjs.Ticker.addEventListener("tick", tick);
+			}
+
+			function addMauste(event) {
+				if (pileHeight <= maxPileHeight) {
+					// TODO: Parametri pitaa muuttaa kun vaihtaa tekstin bitmapiksi
+					var bmp = new createjs.Bitmap(queue.getResult(event.target.text));
+
+					bmp.regX = bmp.image.width/2|0;
+					bmp.regY = bmp.image.height/2|0;
+					bmp.scaleX = 0.5;
+					bmp.scaleY = 0.5;
+					bmp.x = canvas.width * 0.5;
+					bmp.y = canvas.height * 0.65 - mausteOffset;
+
+					mausteOffset += canvas.height * 0.02;
+					pileHeight++;
+
+					stage.addChild(bmp);
+					
+				}
+
+			}
+
+			function tick(event) {
+				stage.update();
+			}
+
+		</script>
 	</head>
 
-	<body>
+	<body onLoad="init()">
+		<canvas id="gameCanvas" width="960" height="540"></canvas>
 	</body>
 
 </html>

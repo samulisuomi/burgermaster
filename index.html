@@ -68,7 +68,7 @@
 				kasaaText.y = canvas.height * 0.9;
 				stage.addChild(kasaaText);
 
-				var currentText = new createjs.Text("KERROSHAMPURILAINEN", "30px Averia Sans Libre", "#000000");
+				currentText = new createjs.Text("KERROSHAMPURILAINEN", "30px Averia Sans Libre", "#000000");
 				currentText.x = canvas.width * 0.12;
 				currentText.y = canvas.height * 0.9;
 				stage.addChild(currentText);
@@ -104,6 +104,8 @@
 					mausteOffset += canvas.height * 0.02;
 					pileHeight++;
 
+					currentText.text = "testi";
+	
 					stage.addChild(bmp);
 					
 					if(event.target.text == "ketsuppi") {
@@ -119,6 +121,7 @@
 			function tick(event) {
 				stage.update();
 			}
+
 
 		</script>
 	</head>

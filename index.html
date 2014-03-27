@@ -129,6 +129,7 @@
 				var pohjaText = new createjs.Text("reset", "24px Averia Sans Libre", "#666");
 				pohjaText.addEventListener("click", function() {
 					pileContainer.removeAllChildren();
+					mausteOffset = 0;
 				});
 				pohjaText.x = canvas.width * 0.9;
 				pohjaText.y = canvas.height * 0.9;

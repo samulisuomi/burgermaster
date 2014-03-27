@@ -41,7 +41,7 @@
 				// Mausteet:
 				queue.loadManifest([
 						{id: "background", src: "assets/misc/background.png"},
-						{id: "pohja", src: "assets/mausteet/pohja.png"},
+						{id: "mauste_pohja", src: "assets/mausteet/pohja.png"},
 						{id: "mauste_ketsuppi", src: "assets/mausteet/ketsuppi.png"},
 						{id: "mauste_kurkkumajoneesi", src: "assets/mausteet/kurkkumajoneesi.png"}
 				]);
@@ -92,7 +92,7 @@
 			function addMauste(event) {
 				if (pileHeight <= maxPileHeight) {
 					// TODO: Parametri pitaa muuttaa kun vaihtaa tekstin bitmapiksi
-					var bmp = new createjs.Bitmap(queue.getResult(event.target.text));
+					var bmp = new createjs.Bitmap(queue.getResult("mauste_" + event.target.text));
 
 					bmp.regX = bmp.image.width/2|0;
 					bmp.regY = bmp.image.height/2|0;

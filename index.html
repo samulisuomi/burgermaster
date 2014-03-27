@@ -11,6 +11,7 @@
 			var canvas;
 			var stage;
 			var queue;
+			var loadingText;
 
 			var currentText;
 			var mausteOffset;
@@ -20,8 +21,13 @@
 			function init() {
 				canvas = document.getElementById("gameCanvas");
 				stage = new createjs.Stage(canvas);
+				loadingText = new createjs.Text("Loading...", "24px Averia Sans Libre", "#000000");
+				loadingText.x = canvas.width * 0.45;
+				loadingText.y = canvas.height * 0.5;
+				stage.addChild(loadingText);
+				stage.update();
 
-								queue = new createjs.LoadQueue();
+				queue = new createjs.LoadQueue();
 				queue.installPlugin(createjs.Sound);
 				queue.addEventListener("complete", handleComplete);
 
@@ -44,6 +50,8 @@
 			}
 
 			function handleComplete(event) {
+				stage.removeChild(loadingText);
+
 				var background = new createjs.Bitmap(queue.getResult("background"));
 				stage.addChild(background);
 

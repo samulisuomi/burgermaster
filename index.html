@@ -32,19 +32,17 @@
 				queue.installPlugin(createjs.Sound);
 				queue.addEventListener("complete", handleComplete);
 
-				/*var request = new XMLHttpRequest();
-				request.open("GET", "assets/maustelista.json", false);
-				request.send(null);
-				var maustelistaObject = JSON.parse(request.responseText);
-				console.log(maustelistaObject);*/
-
-				// Mausteet:
+				// Misc files:
 				queue.loadManifest([
-						{id: "background", src: "assets/misc/background.png"},
-						{id: "mauste_pohja", src: "assets/mausteet/pohja.png"},
-						{id: "mauste_ketsuppi", src: "assets/mausteet/ketsuppi.png"},
-						{id: "mauste_kurkkumajoneesi", src: "assets/mausteet/kurkkumajoneesi.png"}
+						{id: "background", src: "assets/misc/background.png"}	
 				]);
+
+				// Mauste and mausteastia graphics
+				var maustelista = ["juusto", "kansi", "ketsuppi", "kurkku", "kurkkumajoneesi", "paprikamajoneesi", "pekoni", "pihvi_iso", "pihvi_pieni", "pohja", "salaattiannos_iso", "salaattiannos_pieni", "sinappi", "sipuli", "tomaatti", "vali"];
+				for (var i = 0; i < maustelista.length; i++) {
+					//queue.loadFile({id: maustelista[i], src: "assets/mausteastiat/" + maustelista[i] + ".png"});
+					queue.loadFile({id: "mauste_" + maustelista[i], src: "assets/mausteet/" + maustelista[i] + ".png"});
+				}
 
 				// Sounds:
 				queue.loadManifest([

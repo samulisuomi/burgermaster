@@ -28,6 +28,7 @@
 				stage.update();
 
 				queue = new createjs.LoadQueue();
+				createjs.Sound.alternateExtensions = ["mp3"];
 				queue.installPlugin(createjs.Sound);
 				queue.addEventListener("complete", handleComplete);
 
@@ -37,11 +38,18 @@
 				var maustelistaObject = JSON.parse(request.responseText);
 				console.log(maustelistaObject);*/
 
+				// Pngs:
 				queue.loadManifest([
 						{id: "background", src: "assets/misc/background.png"},
 						{id: "pohja", src: "assets/mausteet/pohja.png"},
 						{id: "ketsuppi", src: "assets/mausteet/ketsuppi.png"},
 						{id: "kurkkumajoneesi", src: "assets/mausteet/kurkkumajoneesi.png"}
+				]);
+
+				// Sounds:
+				queue.loadManifest([
+						{id: "sound_blop", src: "assets/sound/blop.ogg"},
+						{id: "sound_ketsuppi", src: "assets/sound/ketsuppi.ogg"}
 				]);
 
 				mausteOffset = 0;
@@ -98,6 +106,12 @@
 
 					stage.addChild(bmp);
 					
+					if(event.target.text == "ketsuppi") {
+						createjs.Sound.play("sound_" + event.target.text).volume = 0.5;
+					}
+					else {
+						createjs.Sound.play("sound_blop");
+					}
 				}
 
 			}

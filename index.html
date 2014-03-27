@@ -10,6 +10,7 @@
 		<script>
 			var canvas;
 			var stage;
+			var pileContainer;
 			var queue;
 			var loadingText;
 
@@ -21,6 +22,7 @@
 			function init() {
 				canvas = document.getElementById("gameCanvas");
 				stage = new createjs.Stage(canvas);
+
 				loadingText = new createjs.Text("Loading...", "24px Averia Sans Libre", "#000000");
 				loadingText.x = canvas.width * 0.45;
 				loadingText.y = canvas.height * 0.5;
@@ -38,9 +40,9 @@
 				]);
 
 				// Mauste and mausteastia graphics
-				var maustelista = ["juusto", "kansi", "ketsuppi", "kurkku", "kurkkumajoneesi", "paprikamajoneesi", "pekoni", "pihvi_iso", "pihvi_pieni", "pohja", "salaattiannos_iso", "salaattiannos_pieni", "sinappi", "sipuli", "tomaatti", "vali"];
+				var maustelista = ["juusto", "kansi", "ketsuppi", "kurkku", "kurkkumajoneesi", "paprikamajoneesi", "pekoni", "pihvi_iso", "pihvi_pieni", "pohja", "salaatti", "sinappi", "sipuli", "tomaatti", "vali"];
 				for (var i = 0; i < maustelista.length; i++) {
-					//queue.loadFile({id: maustelista[i], src: "assets/mausteastiat/" + maustelista[i] + ".png"});
+					queue.loadFile({id: maustelista[i], src: "assets/mausteastiat/" + maustelista[i] + ".png"});
 					queue.loadFile({id: "mauste_" + maustelista[i], src: "assets/mausteet/" + maustelista[i] + ".png"});
 				}
 
@@ -61,7 +63,14 @@
 				var background = new createjs.Bitmap(queue.getResult("background"));
 				stage.addChild(background);
 
+				pileContainer = new createjs.Container();
+				stage.addChild(pileContainer);
+
 				var kasaaText = new createjs.Text("Kasaa:", "30px Averia Sans Libre", "#444444");
+				kasaaText.addEventListener("click", function(event) {
+					pileContainer.removeAllChildren();
+				});
+
 				kasaaText.x = canvas.width * 0.02;
 				kasaaText.y = canvas.height * 0.9;
 				stage.addChild(kasaaText);
@@ -102,9 +111,7 @@
 					mausteOffset += canvas.height * 0.02;
 					pileHeight++;
 
-					currentText.text = "testi";
-	
-					stage.addChild(bmp);
+					pileContainer.addChild(bmp);
 					
 					if(event.target.text == "ketsuppi") {
 						createjs.Sound.play("sound_" + event.target.text).volume = 0.5;

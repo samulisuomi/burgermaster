@@ -23,6 +23,7 @@
 			function init() {
 				canvas = document.getElementById("gameCanvas");
 				stage = new createjs.Stage(canvas);
+				createjs.Touch.enable(stage);
 
 				loadingText = new createjs.Text("Loading...", "24px Averia Sans Libre", "#000000");
 				loadingText.x = canvas.width * 0.45;

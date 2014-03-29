@@ -36,11 +36,6 @@
 				queue.installPlugin(createjs.Sound);
 				queue.addEventListener("complete", handleComplete);
 
-				// Misc files:
-				queue.loadManifest([
-						{id: "background", src: "assets/misc/background.png"}	
-				]);
-
 				// Mauste and mausteastia graphics
 				mausteList = ["sinappi", "ketsuppi", "sipuli", "kurkku", "juusto", "salaatti", "tomaatti", "paprikamajoneesi", "kurkkumajoneesi", "kansi", "vali", "pohja", "pihvi_pieni", "pihvi_iso", "pekoni"];
 				for (var i = 0; i < mausteList.length; i++) {
@@ -48,10 +43,11 @@
 					queue.loadFile({id: "mauste_" + mausteList[i], src: "assets/mausteet/" + mausteList[i] + ".png"});
 				}
 
-				// Sounds:
+				// Other files
 				queue.loadManifest([
 						{id: "sound_blop", src: "assets/sound/blop.ogg"},
-						{id: "sound_ketchup", src: "assets/sound/ketchup.ogg"}
+						{id: "sound_ketchup", src: "assets/sound/ketchup.ogg"},
+						{id: "background", src: "assets/misc/background.png"}
 				]);
 
 				mausteOffset = 0;

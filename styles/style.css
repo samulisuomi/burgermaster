@@ -5,3 +5,13 @@
 body {
 	font-family: "Averia Sans Libre", sans; font-weight: 400;
 }
+
+
+#canvasContainer {
+	width: 100%;
+	text-align:center;
+}
+
+#gameCanvas {
+	margin: 50px;
+}

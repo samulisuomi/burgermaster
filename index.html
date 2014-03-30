@@ -21,6 +21,7 @@
 			var mausteList;
 			var hampurilaiset;
 			var currentBurgerIndex;
+			var currentMausteIndex;
 
 			function init() {
 				canvas = document.getElementById("gameCanvas");
@@ -49,6 +50,8 @@
 				queue.loadManifest([
 						{id: "sound_blop", src: "assets/sound/blop.ogg"},
 						{id: "sound_ketchup", src: "assets/sound/ketchup.ogg"},
+						{id: "sound_fail", src: "assets/sound/fail.ogg"},
+						{id: "sound_success", src: "assets/sound/success.ogg"},
 						{id: "background", src: "assets/misc/background.png"},
 						{id: "hampurilaiset", src: "assets/hampurilaiset.json"}
 				]);
@@ -82,19 +85,12 @@
 			}
 
 			function addMauste(event) {
-				var mausteIsCorrect = true;
 
-				// TODO: if mauste is not correct
-				if (false) {
-					mausteIsCorrect = false;
-				}
+				var imageSource = event.target.image.src.split("/");
+				var fileName = imageSource[imageSource.length-1];
+				var mausteId = fileName.substring(0, fileName.length-4);
 
-				if (mausteIsCorrect) {
-					// Purukumi:
-					var imageSource = event.target.image.src.split("/");
-					var fileName = imageSource[imageSource.length-1];
-					var mausteId = fileName.substring(0, fileName.length-4);
-
+				if (mausteId == hampurilaiset["hampurilaiset"][currentBurgerIndex]["mausteet"][currentMausteIndex]) {
 					var bmp = new createjs.Bitmap(queue.getResult("mauste_" + mausteId));
 
 					if (mausteId == "kansi") {
@@ -122,9 +118,20 @@
 					else {
 						createjs.Sound.play("sound_blop").volume = 0.5;
 					}
+					currentMausteIndex++;
 				}
 				else {
-					// next burger
+					// TODO: 
+					drawBurger();
+					cleanTheTable();
+					createjs.Sound.play("sound_fail").volume = 0.5;
+				}
+
+				if (mausteId == "kansi") {
+					// TODO:
+					drawBurger();
+					cleanTheTable();
+					createjs.Sound.play("sound_success").volume = 0.5;
 				}
 
 			}
@@ -144,8 +151,7 @@
 			function initAstiat() {
 				var pohjaText = new createjs.Text("reset", "24px Averia Sans Libre", "#666");
 				pohjaText.addEventListener("click", function() {
-					pileContainer.removeAllChildren();
-					mausteOffset = 0;
+					cleanTheTable();
 				});
 				pohjaText.x = canvas.width * 0.9;
 				pohjaText.y = canvas.height * 0.9;
@@ -228,8 +234,20 @@
 			}
 
 			function drawBurger() {
+				var previousBurgerIndex = currentBurgerIndex;
+
 				currentBurgerIndex = Math.floor(Math.random() * hampurilaiset["hampurilaiset"].length);
+				while (currentBurgerIndex == previousBurgerIndex) {
+					currentBurgerIndex = Math.floor(Math.random() * hampurilaiset["hampurilaiset"].length);
+				}
+
 				currentText.text = hampurilaiset["hampurilaiset"][currentBurgerIndex]["name"];
+				currentMausteIndex = 0;
+			}
+
+			function cleanTheTable() {
+				pileContainer.removeAllChildren();
+				mausteOffset = 0;
 			}
 
 		</script>

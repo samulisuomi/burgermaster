@@ -20,6 +20,7 @@
 
 			var mausteList;
 			var hampurilaiset;
+			var currentBurgerIndex;
 
 			function init() {
 				canvas = document.getElementById("gameCanvas");
@@ -76,7 +77,7 @@
 
 				createjs.Ticker.addEventListener("tick", tick);
 
-
+				drawBurger();
 
 			}
 
@@ -224,6 +225,11 @@
 
 			function tick(event) {
 				stage.update();
+			}
+
+			function drawBurger() {
+				currentBurgerIndex = Math.floor(Math.random() * hampurilaiset["hampurilaiset"].length);
+				currentText.text = hampurilaiset["hampurilaiset"][currentBurgerIndex]["name"];
 			}
 
 		</script>

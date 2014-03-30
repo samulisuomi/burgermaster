@@ -1,0 +1,24 @@
+{
+  "hampurilaiset": [
+    {
+      "name": "Kerroshampurilainen",
+      "mausteet": [ "pohja", "ketsuppi", "sipuli", "kurkku", "kurkkumajoneesi", "salaatti", "juusto", "pihvi_pieni", "vali", "pihvi_pieni", "paprikamajoneesi", "salaatti", "kansi" ]
+    },
+    {
+      "name": "Hampurilainen",
+      "mausteet": [ "pohja", "ketsuppi", "sinappi", "sipuli", "kurkku", "pihvi_pieni", "kurkkumajoneesi", "kansi" ]
+    },
+    {
+      "name": "Juustohampurilainen",
+      "mausteet": [ "pohja", "ketsuppi", "sinappi", "sipuli", "kurkku", "juusto", "pihvi_pieni", "kurkkumajoneesi", "kansi" ]
+    },
+    {
+      "name": "Megahampurilainen",
+      "mausteet": [ "pohja", "kurkku", "kurkkumajoneesi", "salaatti", "juusto", "pihvi_iso", "vali", "pihvi_iso", "tomaatti", "paprikamajoneesi", "salaatti", "kansi" ]
+    },
+    {
+      "name": "Pekonihampurilainen",
+      "mausteet": [ "pohja", "sinappi", "kurkku", "kurkkumajoneesi", "salaatti", "juusto", "pihvi_pieni", "pekoni", "sinappi", "tomaatti", "kurkkumajoneesi", "kansi" ]
+    }
+  ]
+}

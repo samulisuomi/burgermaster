@@ -19,6 +19,7 @@
 			var pileHeight;
 
 			var mausteList;
+			var hampurilaiset;
 
 			function init() {
 				canvas = document.getElementById("gameCanvas");
@@ -47,7 +48,8 @@
 				queue.loadManifest([
 						{id: "sound_blop", src: "assets/sound/blop.ogg"},
 						{id: "sound_ketchup", src: "assets/sound/ketchup.ogg"},
-						{id: "background", src: "assets/misc/background.png"}
+						{id: "background", src: "assets/misc/background.png"},
+						{id: "hampurilaiset", src: "assets/hampurilaiset.json"}
 				]);
 
 				mausteOffset = 0;
@@ -60,6 +62,12 @@
 				var background = new createjs.Bitmap(queue.getResult("background"));
 				stage.addChild(background);
 
+				hampurilaiset = queue.getResult("hampurilaiset");
+				console.log("Hampurilaisten kokonaismäärä: " + hampurilaiset["hampurilaiset"].length);
+				console.log("Nimi: " + hampurilaiset["hampurilaiset"][0]["name"]);
+				console.log("Mausteiden määrä: " + hampurilaiset["hampurilaiset"][0]["mausteet"].length);
+				console.log("Mausteet: " + hampurilaiset["hampurilaiset"][0]["mausteet"]);
+
 				initGui();
 				initAstiat();
 
@@ -67,6 +75,9 @@
 				stage.addChild(pileContainer);
 
 				createjs.Ticker.addEventListener("tick", tick);
+
+
+
 			}
 
 			function addMauste(event) {

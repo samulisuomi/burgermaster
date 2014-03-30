@@ -67,10 +67,6 @@
 				stage.addChild(background);
 
 				hampurilaiset = queue.getResult("hampurilaiset");
-				console.log("Hampurilaisten kokonaismäärä: " + hampurilaiset["hampurilaiset"].length);
-				console.log("Nimi: " + hampurilaiset["hampurilaiset"][0]["name"]);
-				console.log("Mausteiden määrä: " + hampurilaiset["hampurilaiset"][0]["mausteet"].length);
-				console.log("Mausteet: " + hampurilaiset["hampurilaiset"][0]["mausteet"]);
 
 				initGui();
 				initAstiat();
@@ -146,17 +142,29 @@
 				currentText.x = canvas.width * 0.12;
 				currentText.y = canvas.height * 0.9;
 				stage.addChild(currentText);
+
+				var resetBg = new createjs.Shape();
+				resetBg.graphics.beginFill("#444444").drawRoundRect(0, 0, 100, 50, 10);
+
+				var resetText = new createjs.Text("Uusi", "24px Averia Sans Libre", "#999999");
+				resetText.textAlign = "center";
+				resetText.textBaseline = "middle";
+				resetText.x = 100/2;
+				resetText.y = 50/2;
+
+				var resetButton = new createjs.Container();
+				resetButton.x = canvas.width * 0.87;
+				resetButton.y = canvas.height * 0.87;
+				resetButton.addChild(resetBg, resetText);
+				resetButton.addEventListener("click", function() {
+					drawBurger();
+					cleanTheTable();
+				});
+
+				stage.addChild(resetButton);
 			}
 
 			function initAstiat() {
-				var pohjaText = new createjs.Text("reset", "24px Averia Sans Libre", "#666");
-				pohjaText.addEventListener("click", function() {
-					cleanTheTable();
-				});
-				pohjaText.x = canvas.width * 0.9;
-				pohjaText.y = canvas.height * 0.9;
-				stage.addChild(pohjaText);
-
 				var astiaOffset = 0;
 
 				// sinappi ja ketsuppi

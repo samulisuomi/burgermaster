@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BurgerMaster</title>
+		<meta charset="utf-8">
+
+		<link href="fonts/font.css" rel="stylesheet" type="text/css">
+		<link href="styles/style.css" rel="stylesheet" type="text/css">
+		<script src="lib/createjs-2013.12.12.min.js"></script>
+		<script>
+
+
+		function init() {
+				canvas = document.getElementById("gameCanvas");
+				stage = new createjs.Stage(canvas);
+				createjs.Touch.enable(stage);
+				queue = new createjs.LoadQueue();
+				queue.addEventListener("complete", handleComplete);
+
+		function handleComplete(event) {
+				stage.removeChild(loadingText);
+
+				var background = new createjs.Bitmap(queue.getResult("background"));
+				stage.addChild(background);
+
+				hampurilaiset = queue.getResult("hampurilaiset");
+
+				initGui();
+				initAstiat();
+
+				pileContainer = new createjs.Container();
+				stage.addChild(pileContainer);
+
+				createjs.Ticker.addEventListener("tick", tick);
+
+				//drawBurger();
+
+			}
+
+
+
+
+		</script>
+	</head>
+
+	<body onLoad="init()">
+		<div id="canvasContainer">
+			<canvas id="gameCanvas" width="960" height="540">Selaimesi ei tue HTML5:n canvas-elementtiä</canvas>
+		</div>
+	</body>
+
+</html>

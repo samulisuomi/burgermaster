@@ -66,7 +66,7 @@ function handleComplete(event) {
 
 	createjs.Ticker.addEventListener("tick", tick);
 
-	drawBurger();
+	initNewBurger();
 
 }
 
@@ -85,7 +85,7 @@ function addMauste(event) {
 		else if (mausteId == "vali") {
 			mausteOffset -= canvas.height * 0.012;
 		}
-
+		console.log(currentMausteIndex);
 		bmp.regX = bmp.image.width/2|0;
 		bmp.regY = bmp.image.height/2|0;
 		bmp.scaleX = 0.5;
@@ -105,19 +105,20 @@ function addMauste(event) {
 			createjs.Sound.play("sound_blop").volume = 0.5;
 		}
 		currentMausteIndex++;
+		if (mausteId == "kansi") {
+			// TODO:
+			console.log("You succeeded!");
+			initNewBurger();
+			cleanTheTable();
+			createjs.Sound.play("sound_success").volume = 0.5;
+		}
 	}
 	else {
 		// TODO: 
-		drawBurger();
+		console.log("You failed!");
+		initNewBurger();
 		cleanTheTable();
 		createjs.Sound.play("sound_fail").volume = 0.5;
-	}
-
-	if (mausteId == "kansi") {
-		// TODO:
-		drawBurger();
-		cleanTheTable();
-		createjs.Sound.play("sound_success").volume = 0.5;
 	}
 
 }
@@ -147,9 +148,8 @@ function initGui() {
 	resetButton.y = canvas.height * 0.87;
 	resetButton.addChild(resetBg, resetText);
 	resetButton.addEventListener("click", function() {
-		drawBurger();
+		initNewBurger();
 		cleanTheTable();
-		switchToMenu();
 	});
 
 	stage.addChild(resetButton);
@@ -232,7 +232,7 @@ function tick(event) {
 	stage.update();
 }
 
-function drawBurger() {
+function initNewBurger() {
 	var previousBurgerIndex = currentBurgerIndex;
 
 	currentBurgerIndex = Math.floor(Math.random() * hampurilaiset["hampurilaiset"].length);

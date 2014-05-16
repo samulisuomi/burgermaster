@@ -13,7 +13,7 @@ var hampurilaiset;
 var currentBurgerIndex;
 var currentMausteIndex;
 
-function init() {
+function initGame() {
 	canvas = document.getElementById("gameCanvas");
 	stage = new createjs.Stage(canvas);
 	createjs.Touch.enable(stage);
@@ -149,6 +149,7 @@ function initGui() {
 	resetButton.addEventListener("click", function() {
 		drawBurger();
 		cleanTheTable();
+		switchToMenu();
 	});
 
 	stage.addChild(resetButton);
@@ -246,4 +247,10 @@ function drawBurger() {
 function cleanTheTable() {
 	pileContainer.removeAllChildren();
 	mausteOffset = 0;
+}
+
+function switchToMenu() {
+	$.getScript("scripts/menu.js", function(){
+	   initMenu();
+	});
 }

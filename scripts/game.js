@@ -85,7 +85,7 @@ function addMauste(event) {
 		else if (mausteId == "vali") {
 			mausteOffset -= canvas.height * 0.012;
 		}
-
+		console.log(currentMausteIndex);
 		bmp.regX = bmp.image.width/2|0;
 		bmp.regY = bmp.image.height/2|0;
 		bmp.scaleX = 0.5;
@@ -105,19 +105,20 @@ function addMauste(event) {
 			createjs.Sound.play("sound_blop").volume = 0.5;
 		}
 		currentMausteIndex++;
+		if (mausteId == "kansi") {
+			// TODO:
+			console.log("You succeeded!");
+			initNewBurger();
+			cleanTheTable();
+			createjs.Sound.play("sound_success").volume = 0.5;
+		}
 	}
 	else {
 		// TODO: 
+		console.log("You failed!");
 		initNewBurger();
 		cleanTheTable();
 		createjs.Sound.play("sound_fail").volume = 0.5;
-	}
-
-	if (mausteId == "kansi") {
-		// TODO:
-		initNewBurger();
-		cleanTheTable();
-		createjs.Sound.play("sound_success").volume = 0.5;
 	}
 
 }

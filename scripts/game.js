@@ -66,7 +66,7 @@ function handleComplete(event) {
 
 	createjs.Ticker.addEventListener("tick", tick);
 
-	drawBurger();
+	initNewBurger();
 
 }
 
@@ -108,14 +108,14 @@ function addMauste(event) {
 	}
 	else {
 		// TODO: 
-		drawBurger();
+		initNewBurger();
 		cleanTheTable();
 		createjs.Sound.play("sound_fail").volume = 0.5;
 	}
 
 	if (mausteId == "kansi") {
 		// TODO:
-		drawBurger();
+		initNewBurger();
 		cleanTheTable();
 		createjs.Sound.play("sound_success").volume = 0.5;
 	}
@@ -147,9 +147,8 @@ function initGui() {
 	resetButton.y = canvas.height * 0.87;
 	resetButton.addChild(resetBg, resetText);
 	resetButton.addEventListener("click", function() {
-		drawBurger();
+		initNewBurger();
 		cleanTheTable();
-		switchToMenu();
 	});
 
 	stage.addChild(resetButton);
@@ -232,7 +231,7 @@ function tick(event) {
 	stage.update();
 }
 
-function drawBurger() {
+function initNewBurger() {
 	var previousBurgerIndex = currentBurgerIndex;
 
 	currentBurgerIndex = Math.floor(Math.random() * hampurilaiset["hampurilaiset"].length);

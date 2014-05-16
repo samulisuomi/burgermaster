@@ -149,6 +149,7 @@ function initGui() {
 	resetButton.addEventListener("click", function() {
 		drawBurger();
 		cleanTheTable();
+		switchToMenu();
 	});
 
 	stage.addChild(resetButton);
@@ -246,4 +247,10 @@ function drawBurger() {
 function cleanTheTable() {
 	pileContainer.removeAllChildren();
 	mausteOffset = 0;
+}
+
+function switchToMenu() {
+	$.getScript("scripts/menu.js", function(){
+	   initMenu();
+	});
 }

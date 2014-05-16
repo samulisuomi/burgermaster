@@ -13,7 +13,7 @@ var hampurilaiset;
 var currentBurgerIndex;
 var currentMausteIndex;
 
-function init() {
+function initGame() {
 	canvas = document.getElementById("gameCanvas");
 	stage = new createjs.Stage(canvas);
 	createjs.Touch.enable(stage);

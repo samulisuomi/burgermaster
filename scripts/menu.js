@@ -3,6 +3,6 @@ function initMenu() {
 
 	// This block starts the game script:
 	$.getScript("scripts/game.js", function(){
-	   init();
+	   initGame();
 	});
 }

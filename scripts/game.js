@@ -118,7 +118,7 @@ function addMauste(event) {
 		console.log("You failed!");
 		initNewBurger();
 		cleanTheTable();
-		createjs.Sound.play("sound_fail").volume = 0.5;
+		createjs.Sound.play("sound_fail").volume = 0.2;
 	}
 
 }

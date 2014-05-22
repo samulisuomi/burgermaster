@@ -4,12 +4,12 @@ function initMenu() {
 	createjs.Touch.enable(stage);
 
 	//TODO: menu ui
-	if (window.confirm('Start the game?')) {
+	//if (window.confirm('Start the game?')) {
 		// This needs to be bind to a "Start" button
 	    switchToGame();
-	} else {
+	//} else {
 		// Blank page
-	}
+	//}
 }
 
 function switchToGame() {
